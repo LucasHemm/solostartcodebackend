@@ -28,7 +28,6 @@ public class GameResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
     private static Person p1, p2;
-    List<Role> userList = new ArrayList<>();
 
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
@@ -67,21 +66,19 @@ public class GameResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-//        Agify a1 = new Agify(20, 100);
-//        Genderize g1 = new Genderize("male",1.0);
-//        p1.setAgify(a1);
-//        p1.setGenderize(g1);
+        Agify a1 = new Agify(20, 100);
+        Genderize g1 = new Genderize("male",1.0);
+        p1 = new Person("hans",a1,g1);
 //        userList.add(uRole);
 //        adminList.add(aRole);
 //        u1 = new User("user", "123",userList);
 //        u2 = new User("admin", "123",adminList);
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("User.deleteAllRows").executeUpdate();
-            em.createQuery("delete from Agify ").executeUpdate();
-            em.createQuery("delete from Genderize ").executeUpdate();
+//            em.createQuery("delete from Agify ").executeUpdate();
+//            em.createQuery("delete from Genderize ").executeUpdate();
             em.createQuery("delete from Person").executeUpdate();
-
+            em.persist(p1);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -101,14 +98,15 @@ public class GameResourceTest {
 
 
 
-//    @Test
-//    public void getAllUsers() throws Exception {
-//        given()
-//                .contentType("application/json")
-//                .get("/info/all").then()
-//                .assertThat()
-//                .statusCode(HttpStatus.OK_200.getStatusCode())
-//                .body( equalTo("[2]"));
-//
-//    }
+    @Test
+    public void getAllUsers() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/game/all")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("size()", equalTo(1));
+
+    }
 }

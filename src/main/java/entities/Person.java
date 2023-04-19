@@ -13,11 +13,11 @@ public class Person {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)
     @JoinColumn(name = "agify_id")
     private Agify agify;
 
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)
     @JoinColumn(name = "genderize_id")
     private Genderize genderize;
 

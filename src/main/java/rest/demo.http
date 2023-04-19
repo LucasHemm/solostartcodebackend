@@ -14,6 +14,6 @@ x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJl
 ###
 GET http://localhost:8080/groupstartcodebackend/api/joke
 ###
-GET http://localhost:8080/solobackend/api/game/name/hans
+GET http://localhost:8080/solobackend/api/game/name/mia
 ###
 GET http://localhost:8080/solobackend/api/game/all
