@@ -35,7 +35,7 @@ public class GameResource {
         FACADE.create(personDTO);
         return Response.ok().entity(personDTO).build();
     }
-
+//test
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
