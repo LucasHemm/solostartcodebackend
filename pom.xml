@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dat.sem3</groupId>
-    <artifactId>3semstartcode</artifactId>
+    <artifactId>solo3semstartcode</artifactId>
     <version>1.0.1</version>
     <packaging>war</packaging>
 
-    <name>3semstartcode</name>
+    <name>solo3semstartcode</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
