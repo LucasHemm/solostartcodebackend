@@ -7,6 +7,7 @@ import entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -92,6 +93,13 @@ public class GameFacade {
         GenderizeDTO genderizeDTO = new GenderizeDTO(genderize.getGender(),genderize.getProbability());
         PersonDTO personDTO = new PersonDTO(person.getName(),agifyDTO,genderizeDTO);
         return personDTO;
+    }
+
+    public List<PersonDTO> getAll(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> persons = query.getResultList();
+        return PersonDTO.getDtos(persons);
     }
 
 

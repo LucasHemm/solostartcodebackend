@@ -1,5 +1,13 @@
 package dtos;
 
+import entities.Genderize;
+import entities.Person;
+import entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PersonDTO {
 
     public String name;
@@ -14,6 +22,15 @@ public class PersonDTO {
         this.count = agifyDTO.getCount();
         this.gender = genderizeDTO.getGender();
         this.probability = genderizeDTO.getProbability();
+    }
+    public static List<PersonDTO> getDtos(List<Person> persons) {
+        List<PersonDTO> personDTOS = new ArrayList<>();
+        for(Person p : persons){
+            AgifyDTO agifyDTO = new AgifyDTO(p.getAgify().getAge(), p.getAgify().getCount());
+            GenderizeDTO genderizeDTO = new GenderizeDTO(p.getGenderize().getGender(), p.getGenderize().getProbability());
+            personDTOS.add(new PersonDTO(p.getName(),agifyDTO,genderizeDTO));
+        }
+        return personDTOS;
     }
 
     public String getName() {

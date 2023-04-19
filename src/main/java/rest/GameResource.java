@@ -26,7 +26,7 @@ public class GameResource {
     @GET
     @Path("name/{name}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getJoke(@PathParam("name") String name) throws Exception {
+    public Response getPerson(@PathParam("name") String name) throws Exception {
         AgifyDTO agifyDTO = FACADE.createAgifyDTo(FACADE.fetchData("https://api.agify.io?name="+name));
         System.out.println(agifyDTO);
         GenderizeDTO genderizeDTO = FACADE.createGenderizeDTO(FACADE.fetchData("https://api.genderize.io?name="+name));
@@ -34,6 +34,12 @@ public class GameResource {
         PersonDTO personDTO = new PersonDTO(name,agifyDTO,genderizeDTO);
         FACADE.create(personDTO);
         return Response.ok().entity(personDTO).build();
+    }
 
+    @GET
+    @Path("all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersons() {
+        return Response.ok().entity(FACADE.getAll()).build();
     }
 }
